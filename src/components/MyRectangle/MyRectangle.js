@@ -1,9 +1,9 @@
 /**
  * Created by michal.stys on 24.01.2017.
  */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Konva from 'konva';
-import {Rect} from 'react-konva';
+import { Rect} from 'react-konva';
 import '../../styles/App.css';
 
 class MyRectangle extends Component {
@@ -15,10 +15,11 @@ class MyRectangle extends Component {
         this.state = {
             color: '',
             x: 0,
-            y: 0
+            y: 0,
+            opacity: 0.3
         };
     }
-
+    
     componentDidMount() {
         this.setState({
             color: this.props.color,
@@ -39,6 +40,18 @@ class MyRectangle extends Component {
         })
     }
 
+    handelHover() {
+        this.setState({
+            opacity: 0.6
+        });
+    }
+    
+    handleNotHover() {
+        this.setState({
+            opacity: 0.3
+        });
+    }
+
     handleClick() {
         this.setState({
             color: Konva.Util.getRandomColor()
@@ -47,20 +60,21 @@ class MyRectangle extends Component {
 
     render() {
         return (
-            <Rect
-                key={`rect-${this.props.id}`}
-                ref={this.props.id}
-                width={this.props.width}
-                height={this.props.height}
-                x={this.state.x}
-                y={this.state.y}
-                fill={this.state.color}
-                opacity={0.3}
-                draggable="true"
-                
-                onDragEnd={()=>this.handleDrag(this.props.id)}
-                onClick={()=>this.handleClick()}
-            />
+                <Rect
+                    key={`rect-${this.props.id}`}
+                    ref={this.props.id}
+                    width={this.props.width}
+                    height={this.props.height}
+                    x={this.state.x}
+                    y={this.state.y}
+                    fill={this.state.color}
+                    opacity={this.state.opacity}
+                    draggable={true}
+                    onDragEnd={() => this.handleDrag(this.props.id)}
+                    onClick={() => this.handleClick()}
+                    onMouseOver={() => this.handelHover()}
+                    onMouseOut={() => this.handleNotHover()}
+                    />
         );
     }
 }
