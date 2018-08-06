@@ -55,7 +55,9 @@ class MyRectangle extends Component {
                 x={this.state.x}
                 y={this.state.y}
                 fill={this.state.color}
+                opacity={0.3}
                 draggable="true"
+                
                 onDragEnd={()=>this.handleDrag(this.props.id)}
                 onClick={()=>this.handleClick()}
             />

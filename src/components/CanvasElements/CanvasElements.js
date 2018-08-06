@@ -1,11 +1,31 @@
 import React, {Component} from 'react';
-import {Layer, Stage} from 'react-konva';
+import {Layer, Stage, Image} from 'react-konva';
+import img from '../../assets/1.png';
 
-class CanvasElements extends Component {
 
+  class CanvasElements extends Component {
+    state = {
+        image: null
+      };
+      componentDidMount() {
+        const image = new window.Image();
+        image.src = img;
+        image.onload = () => {
+          // setState will redraw layer
+          // because "image" property is changed
+          this.setState({
+            image: image,
+            width: image.width,
+            height: image.height
+          });
+        };
+      }
     render() {
         return (
-            <Stage width={this.props.width} height={this.props.height}>
+            <Stage width={700} height={700}>
+                <Layer>
+                 <Image image={this.state.image} width={700} height={700} />
+                </Layer>
                 <Layer>
                     {
                         this.props.children
@@ -15,5 +35,6 @@ class CanvasElements extends Component {
         );
     }
 }
+
 
 export default CanvasElements;

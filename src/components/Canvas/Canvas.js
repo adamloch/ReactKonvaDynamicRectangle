@@ -5,8 +5,12 @@ import React, {Component} from 'react';
 import CanvasElements from '../CanvasElements/CanvasElements';
 import MyRectangle from '../MyRectangle/MyRectangle';
 
+
 const CANVAS_WIDTH = 1200;
 const CANVAS_HEIGHT = 500;
+
+
+
 
 class Canvas extends Component {
     constructor() {
@@ -19,19 +23,20 @@ class Canvas extends Component {
                 height: 30,
                 x: 10,
                 y: 0,
-                color: 'red'
+                color: 'red',
             }]
         }
     }
+
 
     createRectangle() {
         let newRectangle = {};
 
         //rand number Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
-        newRectangle.width = Math.floor(Math.random() * (100 - 25 + 1)) + 25;
-        newRectangle.height = Math.floor(Math.random() * (100 - 25 + 1)) + 25;
-        newRectangle.x = Math.floor(Math.random() * (CANVAS_WIDTH - 10 + 1)) + 10;
-        newRectangle.y = Math.floor(Math.random() * (CANVAS_HEIGHT - 10 + 1)) + 10;
+        newRectangle.width = 25;
+        newRectangle.height =  25;
+        newRectangle.x = 100;
+        newRectangle.y = 100;
         newRectangle.color = 'red';
 
         let rectangleFromState = [...this.state.rectangle];
@@ -42,6 +47,9 @@ class Canvas extends Component {
         });
     }
 
+    drawBackground() {
+        return 
+    }
 
     draw() {
         return this.state.rectangle.map((rect, key) => (
@@ -61,7 +69,7 @@ class Canvas extends Component {
     render() {
         return (
             <div>
-                <CanvasElements width={CANVAS_WIDTH} height={CANVAS_HEIGHT}>
+                <CanvasElements width={CANVAS_WIDTH} height={CANVAS_HEIGHT} image={this.state.image}>
                     {
                         this.draw()
                     }
